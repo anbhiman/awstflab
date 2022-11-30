@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout scm') {
+            steps {
+                
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/anbhiman/awstflab.git']]])
+            }
+        }
+        stage('init') {
+            steps {
+                
+                sh ('terraform init -reconfigure -backend-config="dev-backend.conf"')
+            }
+        }
+        stage('plan') {
+            steps {
+                
+                sh ('terraform plan --var-file="devv.tfvars"')
+            }
+        }
+        
+        stage ("terraform Action") {
+            steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --var-file="devv.tfvars" --auto-approve') 
+           }
+        }
+    }
+}
