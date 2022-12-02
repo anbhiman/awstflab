@@ -33,7 +33,7 @@ resource "aws_athena_database" "myathenadb" {
 
 resource "aws_db_instance" "default" {
   allocated_storage    = 10
-  db_name              = "mydb"
+  name              = "mydb"
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t3.micro"
