@@ -25,3 +25,8 @@ resource "aws_s3_bucket" "mybucket" {
       enabled = true
    }
 }
+
+resource "aws_athena_database" "myathenadb" {
+  name   = "athena_database_2122022"
+  bucket = aws_s3_bucket.mybucket.bucket
+}
