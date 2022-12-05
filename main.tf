@@ -20,7 +20,7 @@ provider "aws" {
 #}
 
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "my-tf-s3219-${var.env}-bucket"
+  bucket = "my-tf-s32119-${var.env}-bucket"
   versioning {
       enabled = true
    }
