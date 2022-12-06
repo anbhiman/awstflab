@@ -25,6 +25,8 @@ resource "aws_cloudwatch_log_group" "log-group" {
 
 resource "aws_ecs_task_definition" "awsecstaskdefinition" {
   family                = "labecstaskdefinition"
+  memory                   = "512"
+  cpu                      = "1"
   container_definitions = <<TASK_DEFINITION
 [
   {
