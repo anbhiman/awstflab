@@ -15,3 +15,7 @@ variable "app_environment" {
   type        = string
   description = "Application Environment"
 }
+variable "app_name" {
+  type        = string
+  description = "Application Name"
+}
