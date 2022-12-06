@@ -56,6 +56,6 @@ TASK_DEFINITION
 
   inference_accelerator {
     device_name = "device_1"
-    device_type = "eia1.medium"
+    device_type = "t2.micro"
   }
 }
