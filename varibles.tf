@@ -19,3 +19,6 @@ variable "app_name" {
   type        = string
   description = "Application Name"
 }
+variable "availability_zones" {
+  description = "List of availability zones"
+}
