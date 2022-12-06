@@ -11,3 +11,7 @@ variable "private_subnet_cidrs" {
  description = "Private Subnet CIDR values"
  default     = ["10.0.4.0/24"]
 }
+variable "app_environment" {
+  type        = string
+  description = "Application Environment"
+}
