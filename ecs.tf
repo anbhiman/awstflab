@@ -23,27 +23,39 @@ resource "aws_cloudwatch_log_group" "log-group" {
   }
 }
 
-resource "aws_ecs_task_definition" "test" {
-  family                   = "${var.app_name}-task"
-  requires_compatibilities = ["EC2"]
-  network_mode             = "awsvpc"
-  cpu                      = 1024
-  memory                   = 2048
-  container_definitions    = <<TASK_DEFINITION
+resource "aws_ecs_task_definition" "awsecstaskdefinition" {
+  family                = "test"
+  container_definitions = <<TASK_DEFINITION
 [
   {
-    "name": "iis",
-    "image": "mcr.microsoft.com/windows/servercore/iis",
-    "cpu": 1024,
-    "memory": 2048,
-    "essential": true
+    "cpu": 10,
+    "command": ["sleep", "10"],
+    "entryPoint": ["/"],
+    "environment": [
+      {"name": "VARNAME", "value": "VARVAL"}
+    ],
+    "essential": true,
+    "image": "jenkins",
+    "memory": 128,
+    "name": "jenkins",
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 8080
+      }
+    ],
+        "resourceRequirements":[
+            {
+                "type":"InferenceAccelerator",
+                "value":"device_1"
+            }
+        ]
   }
 ]
 TASK_DEFINITION
 
-  runtime_platform {
-    operating_system_family = "WINDOWS_SERVER_2019_CORE"
-    cpu_architecture        = "X86_64"
+  inference_accelerator {
+    device_name = "device_1"
+    device_type = "eia1.medium"
   }
-  
 }
