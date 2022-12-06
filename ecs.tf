@@ -24,7 +24,7 @@ resource "aws_cloudwatch_log_group" "log-group" {
 }
 
 resource "aws_ecs_task_definition" "awsecstaskdefinition" {
-  family                = "test"
+  family                = "labecstaskdefinition"
   container_definitions = <<TASK_DEFINITION
 [
   {
